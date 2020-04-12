@@ -1,7 +1,9 @@
 # Vue.js
-Vue.js study
 
-- [X] vue.js
-- [X] 데일리리포트앱 만들기
+## To-do List
+- [-] Vue.js Study
+- [-] 데일리리포트앱 만들기
 
-강의 내용 출처: 프로그래머스 vue.js로 데일리리포트앱 만들기 - 문윤기 강사님
+### 출처
+[Vue.js Study](https://kr.vuejs.org/v2/guide/)
+[데일리리포트앱 만들기](https://programmers.co.kr/learn/courses/4672)
