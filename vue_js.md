@@ -97,7 +97,7 @@ DOM을 템플릿으로 사용할 때(예: `el` 옵션을 사용하여 기존 콘
     <my-row>...</my-row>
 <table>
 ```
-사용자 지정 컴포넌트 <code><my-row></code>는 잘못 된 컨텐츠가 되어, 결과적으로 렌더링시 에러를 발생. 해결 방법은 <code>is</code> 특수 속성을 사용하는 것
+사용자 지정 컴포넌트 `<my-row>`는 잘못 된 컨텐츠가 되어, 결과적으로 렌더링시 에러를 발생. 해결 방법은 <code>is</code> 특수 속성을 사용하는 것
 ```html
 <table>
     <tr is="my-row"></tr>
@@ -160,3 +160,29 @@ data : function(){
 이처럼 각 컴포넌트의 코드를 상대적으로 격리할 수 있도록 작성하고 추론할 수 있으므로 유지 관리가 쉽고 잠재적으로 쉽게 재사용 가능함
 Vue.js에서 부모-자식 컴포넌트 관계는 **props는 아래**로, **events 위로** 라고 요약 할 수 있음. 부모는 **props**를 통해 자식에게 데이터를 전달하고 자식은 **events**를 통해 부모에게 메시지를 보냄.
 ![props-events](./images/props-events.png)
+
+## Vue.js 와 jQuery 비교
+```html
+<input id="thing" type="text"/>
+<p class="formname"></p>
+<script>
+$(function() {
+    $('#app').change(function(e) {
+        var input = $(this).find('#thing').val();
+        $(this).find('.formname').append(input);
+    });
+});
+</script>
+```
+```html
+<input id="name" type="text" v-model="name"/>
+<p>{{ name }}</p>
+<script>
+new Vue({
+    el:'#app',
+    data: {
+        name: ''
+    }
+});
+</script>
+```
