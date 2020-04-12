@@ -1,8 +1,8 @@
 # Vue.js
 
 ## To-do List
-- [-] Vue.js Study
-- [-] 데일리리포트앱 만들기
+- [X] Vue.js Study
+- [ ] 데일리리포트앱 만들기
 
 ### 출처
 [Vue.js Study](https://kr.vuejs.org/v2/guide/)
