@@ -243,3 +243,71 @@ altText: "A pair of Socks"
 - 구문은 `v-bind:` or `:`for short.
 - 뒤에오는 속성 이름 `:`은 데이터를 바인딩할 속성을 지정
 - 속성의 따옴표 내에서 바인딩 하는 데이터를 참조
+
+## v-if, v-else, v-else-if
+- `v-if`와 `v-else`
+```html
+<div v-if="Math.random() > 0.5">
+    이제 나를 볼 수 있어요
+</div>
+<div v-else>
+    이제는 안 보입니다
+</div>
+```
+- `v-else-if`
+```html
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+```
+- `v-else`와 마찬가지로, `v-else-if` 엘리먼트는`v-if` 또는 `v-else-if` 엘리먼트 바로 뒤에 와야 합니다.
+
+# `key`를 이용한 재사용 가능한 엘리먼트 제어
+```html
+<template v-if="loginType === 'username'">
+  <label>사용자 이름</label>
+  <input placeholder="사용자 이름을 입력하세요">
+</template>
+<template v-else>
+  <label>이메일</label>
+  <input placeholder="이메일 주소를 입력하세요">
+</template>
+```
+- 위 코드에서 `loginType`을 바꾸어도 사용자가 이미 입력한 내용은 지워지지 않음
+- 템플릿 모두 같은 요소를 사용하므로 `input`은 대체되지 않고 단지 placeholder만 변경
+**항상 바람직한 코드는 아님. 두 엘리먼트는 완전히 별개이므로 `key`속성을 추가하여 재사용이 가능하게 만들기**
+```html
+<template v-if="loginType === 'username'">
+  <label>사용자 이름</label>
+  <input placeholder="사용자 이름을 입력하세요" key="username-input">
+</template>
+<template v-else>
+  <label>이메일</label>
+  <input placeholder="이메일 주소를 입력하세요" key="email-input">
+</template>
+```
+- 이제 트랜지션 할 때마다 입력이 처음부터 렌더링 됨
+- `label` 엘리먼트는 key 속성이 없기 때문에 여전히 효율적으로 재사용 됨
+
+## v-show
+- `v-show`는 <template> 구문을 지원하지 않으며 v-else와도 작동하지 않음
+- `v-show`가 있는 엘리먼트는 항상 렌더링 되고 DOM에 남아있음
+- `v-show`는 단순히 엘리먼트에 `display` CSS 속성을 토글함
+    - `V-show`는 가시성을 토글하기 만하며 DOM에서 요소를 삽입하거나 제거하지 않음
+
+## v-if vs v-show
+- `v-if`는 조건부 블럭 안의 이벤트 리스너와 자식 컴포넌트가 토글하는 동안 적절하게 제거되고 다시 만들어지기 때문에 “진짜” 조건부 렌더링
+- `v-if`는 초기 렌더링에서 조건이 거짓인 경우 아무것도 하지 않음. 조건 블록이 처음으로 참이 될 때 까지 렌더링 되지 않음.
+- `v-show`는 훨씬 단순. CSS 기반 토글만으로 초기 조건에 관계 없이 엘리먼트가 항상 렌더링 됨.
+- 일반적으로 `v-if`는 토글 비용이 높고 `v-show`는 초기 렌더링 비용이 더 높음. 매우 **자주 바꾸기를 원한다면** `v-show`를, **런타임 시 조건이 바뀌지 않으면** v-if를 권장
+
+
