@@ -186,3 +186,38 @@ new Vue({
 });
 </script>
 ```
+
+## Vue 인스턴스
+- 기본
+```javascript
+Var app = new Vue({options})
+```
+- 데이터를 제자리에 두기
+```html
+<h1>{{ product }}</h1>
+```
+```javascript
+data : {
+    product : "Socks"
+}
+```
+- Important Term: Expression
+    - 표현식을 사용하면 기존 데이터 값을 논리와 함께 활용하여 새 데이터 값을 생성 가능
+    - Vue의 표현을 보면 {{ product }}에 연결된 Vue 인스턴스 데이터를 참조하고 있음을 알 수 있음
+    - 해당 표현식을 product 값으로 대체 "이 경우 Socks"
+- 표현식을 사용할 수 있는 다른 방법들
+```javascript
+{{ product + '?' }}
+{{ firstName + ' ' + lastName }}
+{{ message.split('').reverse().join('') }}
+```
+
+- Vue 인스턴스는 모든 Vue 응용 프로그램의 루트
+- Vue 인스턴스는 DOM 요소에 연결됨
+- Vue 인스턴스의 데이터는 `{{}}`을 사용 
+- Vue는 반응성(reactive)이 있음
+
+## Vue의 반응성
+Vue가 `product`의 값을 즉시 표현 할 수 있는 이유는 Vue가 반응하기 때문. 인스턴스의 데이터는 데이터가 참조되는 모든 장소에 연결됨. 따라서 데이터를 참조하는 HTML 내에 데이터를 표시 할 수 있고, 데이터가 변경될 때 마다 새로운 값을 표시하도록 업데이트함.
+<br/>
+console창에 입력하여 product를 새로 정의하면 즉시 데이터가 업데이트 되는 것을 알 수 있음
