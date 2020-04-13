@@ -221,3 +221,25 @@ data : {
 Vue가 `product`의 값을 즉시 표현 할 수 있는 이유는 Vue가 반응하기 때문. 인스턴스의 데이터는 데이터가 참조되는 모든 장소에 연결됨. 따라서 데이터를 참조하는 HTML 내에 데이터를 표시 할 수 있고, 데이터가 변경될 때 마다 새로운 값을 표시하도록 업데이트함.
 <br/>
 console창에 입력하여 product를 새로 정의하면 즉시 데이터가 업데이트 되는 것을 알 수 있음
+
+## Vue 데이터 바인딩
+- `src`속성을 v-bind 하기
+```html
+<img v-bind:src="image" />
+```
+이것은 다음과 같은 뜻이 됨
+```html
+<img src="./images/green_socks.jpg" />
+```
+- `alt`속성을 v-bind 하기
+```javascript
+altText: "A pair of Socks"
+```
+다음과 같이 바인딩 할 수 있음
+```html
+<img v-bind:src="image" v-bind:alt="altText"/>
+```
+- 데이터는 HTMl 속성에 바인딩 될 수 있음
+- 구문은 `v-bind:` or `:`for short.
+- 뒤에오는 속성 이름 `:`은 데이터를 바인딩할 속성을 지정
+- 속성의 따옴표 내에서 바인딩 하는 데이터를 참조

@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>div#app에 연결하여 데이터를 업데이트하기</title>
+    <link rel="stylesheet" href="product.css">
 </head>
 <body>
+    <div class="nav-bar"></div>
     <div id="app">
-        <h1>{{ product }}</h1>
-        <p>{{ description }}</p>
+        <div class="product">
+            <div class="product-image">
+                <img v-bind:src="image" v-bind:alt="altText"/>
+            </div>
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p>{{ description }}</p>
+                <a v-bind:href="link"target="_blank">More products like this</a>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="product.js"></script>
