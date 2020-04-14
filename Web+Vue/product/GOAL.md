@@ -43,3 +43,27 @@
     -  `v-on` 지시어는 방법을 트리거 할 수 있음
     - 트리거 된 메소드는 인수를 취할 수 있음
     - `this` 현재 Vue 인스턴스의 데이터와 인스턴스 내에 선언된 다른 메소드를 참조
+- 클래스 및 스타일 바인딩
+    - 데이터를 요소의 스타일 속성과 클래스에 바인딩하여 HTML을 동적으로 스타일링하는 방법
+    - `:style={"backgroundColor:variant.variantColor"}`
+    - 이전에 작성했던 `p` 태그에 `updateProduct(variant.variantImage)`를 `div`태그에 다시 옮겨주면 더 깔끔한 이미지를 확인 할 수 있음
+    - 데이터 요소의 `style` 속성에 바인딩 될 수 있음
+    - 데이터는 요소 `class` 바인딩 될 수 있음
+    - 전체 class 객체 또는 class 배열을 요소에 바인딩 할 수 있음
+        - 예) 
+        ```html
+        <p :style="[styleObject, styleObject2]">
+        ```
+        ```javascript
+        data: {
+            styleObject: {
+                color: 'red',
+                font-size: '13px'
+            },
+            styleObject2: {
+                margin: '5px',
+                padding: '20px'
+            }
+        }
+        ```
+    - 단순히 class 명을 지정하고 스타일 시트에서 작업할 경우 `class`로 속성을 부여해주면 되고, js파일에서 vue data에 저장된 내용을 사용할 경우 `:class`로 지정해 줄 것
