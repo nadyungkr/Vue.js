@@ -2,6 +2,8 @@
 
 ## To-do List
 - [X] Vue.js Study
+- [X] to-do list(v-for)
+- [X] product 쇼핑 페이지 구현
 - [ ] 데일리리포트앱 만들기
 
 ### 출처
