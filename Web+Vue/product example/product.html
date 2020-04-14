@@ -21,9 +21,18 @@
                 <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
                 <p v-else>Out of Stock</p>
                 <span v-if="onSale">On sale!</span>
-            </div>
-        </div>
-    </div>
+                <ul>
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ul>
+                <ul>
+                    <li v-for="size in sizes">{{ size }}</li>
+                </ul>
+                <div v-for="variant in variants" :key="variant.variantId">
+                    <p>{{ variant.variantColor }}</p>
+                </div>
+            </div><!--productInfo-->
+        </div><!--product-->
+    </div><!--app-->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="product.js"></script>
 </body>

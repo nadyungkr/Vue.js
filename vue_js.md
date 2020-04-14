@@ -310,4 +310,67 @@ altText: "A pair of Socks"
 - `v-show`는 훨씬 단순. CSS 기반 토글만으로 초기 조건에 관계 없이 엘리먼트가 항상 렌더링 됨.
 - 일반적으로 `v-if`는 토글 비용이 높고 `v-show`는 초기 렌더링 비용이 더 높음. 매우 **자주 바꾸기를 원한다면** `v-show`를, **런타임 시 조건이 바뀌지 않으면** v-if를 권장
 
+## v-for
+- ES6에서 사용하는 `for in`과 매우 비슷함
+- `v-for` 지시어는 데이터 배열을 반복할 수 있음
+- 반복하는 배열의 요소에 별칭을 지정하고, 배열의 이름을 지정할 것
+- `v-for="item in items"`
+- 객체의 배열을 반복할 수도 있음.
+- .표기를 사용하여 객체의 값을 표시할 수 있음
+- 사용 할 때는 렌더링 된 각 요소에 고유한 키를 지정하는 것이 좋음
+- `itemId`같은 별칭을 지정해 아이디를 키에 저장하도록 함
+```html
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
+```
+```javascript
+var example1 = new Vue({
+  el: '#example-1',
+  data: {
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  }
+})
+```
+- `v-for` 블록안에 부모 범위 속성에 대한 모든 권한 있음
+- `v-for`는 또한 현재 항목의 인덱스에 대한 두번째 전달인자 옵션을 제공
+```html
+<ul id="example-2">
+  <li v-for="(item, index) in items">
+    {{ parentMessage }} - {{ index }} - {{ item.message }}
+  </li>
+</ul>
+```
+```javascript
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    parentMessage: 'Parent',
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  }
+})
+```
+- 결과
+    - Parent-0-Foo
+    - Parent-1-Bar
+- `in`대신에 `of`를 구분자로 사용 할 수 있음. 
+- `v-for`와 객체 관계는 `v-for`를 사용하여 객체의 속성을 반복할 수 있음
+- 객체 속성,두번째 전달 인자, 인덱스도 제공함
+- 콘솔을 열어서 배열의 변경 감지를 확인 할 수 있음
+    - 변이 메소드는 다음과 같음
+    - `push()`
+    - `pop()`
+    - `shift()`
+    - `unshift()`
+    - `splice()`
+    - `sort()`
+    - `reverse()`
 
