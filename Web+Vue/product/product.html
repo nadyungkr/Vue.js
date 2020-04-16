@@ -9,40 +9,48 @@
 <body>
     <div class="nav-bar"></div>
     <div id="app">
+  
         <div class="product">
+            
             <div class="product-image">
-                <img v-bind:src="image" v-bind:alt="altText"/>
+                <img :src="image" />
             </div>
+
             <div class="product-info">
                 <h1>{{ product }}</h1>
-                <p>{{ description }}</p>
-                <a v-bind:href="link"target="_blank">More products like this</a>
-                <p v-if="inventory > 10">In Stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                <p v-if="inStock">In Stock</p>
                 <p v-else>Out of Stock</p>
-                <span v-if="onSale">On sale!</span>
+
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
                 </ul>
-                <ul>
-                    <li v-for="size in sizes">{{ size }}</li>
-                </ul>
-                <div v-for="variant in variants" 
-                :key="variant.variantId"
-                class="color-box"
-                :style="{backgroundColor: variant.variantColor}"
-                @mouseover="updateProduct(variant.variantImage)"
+
+                <div class="color-box"
+                    v-for="(variant, index) in variants" 
+                    :key="variant.variantId"
+                    :style="{ backgroundColor: variant.variantColor }"
+                    @mouseover="updateProduct(index)"
+                    >
+                </div> 
+
+                <button v-on:click="addToCart" 
+                    :disabled="!inStock"
+                    :class="{ disabledButton: !inStock }"
                 >
-                </div>
-                <button v-on:click="addToCart">Add to Cart</button>
-                <button v-on:click="removeFromCart">Remove From Cart</button>
+                Add to cart
+                </button>
+
                 <div class="cart">
-                    <p>Cart{{ cart }}</p>
+                    <p>Cart({{ cart }})</p>
                 </div>
-            </div><!--productInfo-->
-        </div><!--product-->
-    </div><!--app-->
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+            </div>  
+
+        </div>
+  
+    </div> 
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
     <script src="product.js"></script>
 </body>
 </html>
