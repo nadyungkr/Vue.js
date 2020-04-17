@@ -19,7 +19,8 @@ var app = new Vue({
             variantQuantity: 0     
           }
         ],
-        cart: 0
+        cart: 0,
+        onSale: true
     },
     methods: {
         addToCart: function() {
@@ -39,6 +40,12 @@ var app = new Vue({
         },
         inStock(){
             return this.variants[this.selectedVariant].variantQuantity
-        }
-    }
+        },
+        sale() {
+            if (this.onSale) {
+              return this.brand + ' ' + this.product + ' are on sale!' //sale이 true일 때 실행되는 내용
+            } 
+              return  this.brand + ' ' + this.product + ' are not on sale'
+          }
+      }
 });

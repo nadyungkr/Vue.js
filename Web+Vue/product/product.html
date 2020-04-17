@@ -20,6 +20,7 @@
                 <h1>{{ product }}</h1>
                 <p v-if="inStock">In Stock</p>
                 <p v-else>Out of Stock</p>
+                <p v-if="onSale">{{ sale }}</p>
 
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
@@ -48,7 +49,7 @@
 
         </div>
   
-    </div> 
+    </!DOCTYPE> 
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
     <script src="product.js"></script>

@@ -68,3 +68,10 @@
         ```
     - 단순히 class 명을 지정하고 스타일 시트에서 작업할 경우 `class`로 속성을 부여해주면 되고, js파일에서 vue data에 저장된 내용을 사용할 경우 `:class`로 지정해 줄 것
 - 계산 된 속성 다루기. 값을 저장하지 않고 값을 계산하는 속성 다루기.
+    - data에 저장된 `brand`와 `product`를 하나의 문자열로 표시하기
+    - 데이터에 두 값을 연결하는 방법은 `computed` 인스턴스에 옵션을 추가하고 `title`이라는 속성을 만들기
+    - `title` 속성에 `brand`와 `product`를 새로운 문자열로 반환하기
+    - `computed: {title() { return this.brand + ' ' + this.product }}`
+- Data 속성에 `Onsale`을 추가하고 `OnSale`이 true일 때 brand + product 내용이 추가 되게 만들기
+    - `onSale`을 데이터 속성에 추가하기
+    - `brand`와 `product`내용이 보여지게 한다 (JS 파일 computed 인스턴스 내용에 추가)
