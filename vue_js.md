@@ -507,7 +507,7 @@ new Vue({
   - `.right`
   - `.middle`
 
-## 계산된 속성 및 Watchers
+## 계산된 속성
 - 템플릿 내 표현은 매우 편리하지만 간단한 작업을 위한 것이다!
 - 템플릿에 너무 많은 로직을 추가하면 부풀어지고 유지하기 힘들다
 
@@ -518,3 +518,84 @@ new Vue({
 ```
 - 이 시점에서 템플릿은 더 이상 단순하고 선언적이지 않음
 - 그렇기 때문에 복잡한 논리에는 **계산 된 속성**을 사용해야 함
+```html
+<div id="example">
+  {{ reverseM }}
+</div>
+```
+```javascript
+var app = new Vue{(
+    el:`#app`,
+    computed: {
+      revrseM(){
+        return message.split('').reverse().join('')
+      }
+    }
+)}
+```
+- 위 코드처럼 변경해서 반환하는 것이 좋다
+
+## Watcher
+```html
+<div id="watch-example">
+  <p>
+    Ask a yes/no question:
+    <input v-model="question">
+  </p>
+  <p>{{ answer }}</p>
+</div>
+```
+```javascript
+<!-- Since there is already a rich ecosystem of ajax libraries    -->
+<!-- and collections of general-purpose utility methods, Vue core -->
+<!-- is able to remain small by not reinventing them. This also   -->
+<!-- gives you the freedom to use what you're familiar with.      -->
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script>
+var watchExampleVM = new Vue({
+  el: '#watch-example',
+  data: {
+    question: '',
+    answer: 'I cannot give you an answer until you ask a question!'
+  },
+  watch: {
+    // whenever question changes, this function will run
+    question: function (newQuestion, oldQuestion) {
+      this.answer = 'Waiting for you to stop typing...'
+      this.debouncedGetAnswer()
+    }
+  },
+  created: function () {
+    // _.debounce is a function provided by lodash to limit how
+    // often a particularly expensive operation can be run.
+    // In this case, we want to limit how often we access
+    // yesno.wtf/api, waiting until the user has completely
+    // finished typing before making the ajax request. To learn
+    // more about the _.debounce function (and its cousin
+    // _.throttle), visit: https://lodash.com/docs#debounce
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+  },
+  methods: {
+    getAnswer: function () {
+      if (this.question.indexOf('?') === -1) {
+        this.answer = 'Questions usually contain a question mark. ;-)'
+        return
+      }
+      this.answer = 'Thinking...'
+      var vm = this
+      axios.get('https://yesno.wtf/api')
+        .then(function (response) {
+          vm.answer = _.capitalize(response.data.answer)
+        })
+        .catch(function (error) {
+          vm.answer = 'Error! Could not reach the API. ' + error
+        })
+    }
+  }
+})
+</script>
+```
+- 대부분의 경우 계산 된 속성이 더 적합하지만 사용자 지정 감시자가 필요한 경우가 있음
+- 그렇기 때문에 Vue는 watch옵션을 통해 데이터 변경에 반응하는보다 일반적인 방법을 제공
+- 데이터 변경에 대한 응답으로 비동기식 또는 값 비싼 작업을 수행하려는 경우에 가장 유용
