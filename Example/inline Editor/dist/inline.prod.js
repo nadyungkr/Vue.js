@@ -1,0 +1,1 @@
+"use strict";var inline=new Vue({el:"#main",data:{show_tooltip:!1,text_content:"Edit me."},methods:{hideTooltip:function(){this.show_tooltip=!1},toggleTooltip:function(){this.show_tooltip=!this.show_tooltip}}});
