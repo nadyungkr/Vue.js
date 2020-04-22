@@ -1,0 +1,1 @@
+"use strict";var web=new Vue({el:"#main",data:{active:"home"},methods:{makeActive:function(e){this.active=e}}});
